@@ -11,8 +11,7 @@ verifies they comply with length restrictions defined through attributes or Enti
 
 ## Terms of use
 
-By using this project or its source code, for any purpose and in any shape or form, you grant your **implicit agreement
-** to all of the following statements:
+By using this project or its source code, for any purpose and in any shape or form, you grant your **implicit agreement** to all of the following statements:
 
 - You unequivocally condemn Russia and its military aggression against Ukraine
 - You recognize that Russia is an occupant that unlawfully invaded a sovereign state
