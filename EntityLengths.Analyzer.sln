@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLengths.Analyzer", "src\EntityLengths.Analyzer\EntityLengths.Analyzer.csproj", "{F9F0EE94-4A79-469A-84EE-9E9562CC40E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLengths.Analyzer.Sample", "samples\EntityLengths.Analyzer.Sample\EntityLengths.Analyzer.Sample.csproj", "{D7573551-9330-472B-A5D3-F1A9991308E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{473983B2-46F9-4595-A226-CD27057B322A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{AE485AB4-8FDA-4AE7-9B23-5B5CE3451E0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D18B05A8-6CE8-4E92-A898-1B06D2032C43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLengths.Analyzer.Tests", "test\EntityLengths.Analyzer.Tests\EntityLengths.Analyzer.Tests.csproj", "{3638A4EC-E87E-4166-9129-272A92B2812C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9F0EE94-4A79-469A-84EE-9E9562CC40E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F0EE94-4A79-469A-84EE-9E9562CC40E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F0EE94-4A79-469A-84EE-9E9562CC40E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F0EE94-4A79-469A-84EE-9E9562CC40E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7573551-9330-472B-A5D3-F1A9991308E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7573551-9330-472B-A5D3-F1A9991308E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7573551-9330-472B-A5D3-F1A9991308E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7573551-9330-472B-A5D3-F1A9991308E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3638A4EC-E87E-4166-9129-272A92B2812C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3638A4EC-E87E-4166-9129-272A92B2812C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3638A4EC-E87E-4166-9129-272A92B2812C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3638A4EC-E87E-4166-9129-272A92B2812C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F9F0EE94-4A79-469A-84EE-9E9562CC40E5} = {473983B2-46F9-4595-A226-CD27057B322A}
+		{D7573551-9330-472B-A5D3-F1A9991308E9} = {AE485AB4-8FDA-4AE7-9B23-5B5CE3451E0B}
+		{3638A4EC-E87E-4166-9129-272A92B2812C} = {D18B05A8-6CE8-4E92-A898-1B06D2032C43}
+	EndGlobalSection
+EndGlobal
