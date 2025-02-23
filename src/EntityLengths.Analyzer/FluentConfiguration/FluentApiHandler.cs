@@ -1,30 +1,91 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EntityLengths.Analyzer.FluentConfiguration;
 
 internal class FluentApiHandler
 {
-    private FluentApiHandler()
-    {
-    }
+    private FluentApiHandler() { }
 
-    public static int? GetMaxLengthFromFluentApi(SemanticModel semanticModel, IPropertySymbol property)
+    public static int? GetMaxLengthFromFluentApi(
+        SemanticModel semanticModel,
+        IPropertySymbol property
+    )
     {
-        var walker = new FluentConfigurationWalker(semanticModel, property);
-
-        // Walk through all syntax trees in the compilation
-        foreach (var tree in semanticModel.Compilation.SyntaxTrees)
+        try
         {
-            var root = tree.GetRoot();
-            walker.Visit(root);
+            var dbContextType = semanticModel.Compilation.GetTypeByMetadataName(
+                Constants.EfDbContextNamespace
+            );
 
-            // If we found a max length, return it
-            if (walker.MaxLength.HasValue)
+            if (dbContextType is null)
             {
-                return walker.MaxLength;
+                return null;
             }
-        }
 
-        return null;
+            foreach (var syntaxTree in semanticModel.Compilation.SyntaxTrees)
+            {
+                var treeSemanticModel = semanticModel.Compilation.GetSemanticModel(syntaxTree);
+
+                var root = syntaxTree.GetRoot();
+
+                var classDeclarations = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
+
+                foreach (var classDecl in classDeclarations)
+                {
+                    if (
+                        treeSemanticModel.GetDeclaredSymbol(classDecl)
+                        is not INamedTypeSymbol classSymbol
+                    )
+                    {
+                        continue;
+                    }
+
+                    var baseType = classSymbol.BaseType;
+                    while (baseType is not null)
+                    {
+                        if (SymbolEqualityComparer.Default.Equals(baseType, dbContextType))
+                        {
+                            var onModelCreating = classDecl
+                                .Members.OfType<MethodDeclarationSyntax>()
+                                .FirstOrDefault(m =>
+                                    string.Equals(
+                                        m.Identifier.Text,
+                                        Constants.OnModelCreatingMethod,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                );
+
+                            if (onModelCreating is not null)
+                            {
+                                var walker = new FluentConfigurationWalker(
+                                    treeSemanticModel,
+                                    property
+                                );
+
+                                walker.Visit(onModelCreating);
+
+                                if (walker.MaxLength.HasValue)
+                                {
+                                    return walker.MaxLength;
+                                }
+                            }
+
+                            break;
+                        }
+
+                        baseType = baseType.BaseType;
+                    }
+                }
+            }
+
+            return null;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 }
